@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEST Prep Dashboard</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+
+            <div class="logo">
+                <h2>⚛ NEST Tracker</h2>
+                <p>Study. Track. Improve.</p>
+            </div>
+
+            <nav class="nav-links">
+                <a href="#dashboard">Dashboard</a>
+                <a href="#subjects">Subjects</a>
+                <a href="#timer">Timer</a>
+                <a href="#mocks">Mock Tests</a>
+                <a href="#goals">Goals</a>
+                <a href="#backup">Backup</a>
+            </nav>
+
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+
+            <!-- HEADER -->
+            <header class="header">
+                <div>
+                    <h1>Hello Hot Stuff 👋</h1>
+                    <p>Track your preparation journey.</p>
+                </div>
+
+                <div class="streak-card">
+                    <span>🔥 Streak</span>
+                    <h2 id="streakCount">0</h2>
+                </div>
+            </header>
+
+            <!-- OVERVIEW -->
+            <section class="cards-grid">
+
+                <div class="card">
+                    <h3>Total Hours</h3>
+                    <h1 id="totalHours">0</h1>
+                </div>
+
+                <div class="card">
+                    <h3>Today's Hours</h3>
+                    <h1 id="todayHours">0</h1>
+                </div>
+
+                <div class="card">
+                    <h3>Total Mocks</h3>
+                    <h1 id="totalMocks">0</h1>
+                </div>
+
+                <div class="card">
+                    <h3>Best Score</h3>
+                    <h1 id="bestScore">0</h1>
+                </div>
+
+            </section>
+
+            <!-- SUBJECT TRACKER -->
+            <section class="section" id="subjects">
+
+                <div class="section-header">
+                    <h2>Study Log</h2>
+                </div>
+
+                <div class="form-grid">
+
+                    <select id="subjectSelect">
+                        <option value="Physics">Physics</option>
+                        <option value="Chemistry">Chemistry</option>
+                        <option value="Mathematics">Mathematics</option>
+                        <option value="Biology">Biology</option>
+                        <option value="Mock Test">Mock Test</option>
+                    </select>
+
+                    <input
+                        type="number"
+                        id="hoursInput"
+                        placeholder="Hours Studied"
+                        min="0"
+                        step="0.1"
+                    >
+
+                    <button id="addStudyBtn">
+                        Add Session
+                    </button>
+
+                </div>
+
+            </section>
+
+            <!-- SUBJECT CARDS -->
+            <section class="subject-grid">
+
+                <div class="subject-card">
+                    <h3>Physics</h3>
+                    <h1 id="physicsHours">0</h1>
+                    <span>hours</span>
+                </div>
+
+                <div class="subject-card">
+                    <h3>Chemistry</h3>
+                    <h1 id="chemistryHours">0</h1>
+                    <span>hours</span>
+                </div>
+
+                <div class="subject-card">
+                    <h3>Mathematics</h3>
+                    <h1 id="mathHours">0</h1>
+                    <span>hours</span>
+                </div>
+
+                <div class="subject-card">
+                    <h3>Biology</h3>
+                    <h1 id="biologyHours">0</h1>
+                    <span>hours</span>
+                </div>
+
+                <div class="subject-card">
+                    <h3>Mock Test</h3>
+                    <h1 id="mockHours">0</h1>
+                    <span>hours</span>
+                </div>
+
+            </section>
+
+            <!-- CHARTS -->
+            <section class="chart-grid">
+
+                <div class="chart-card">
+                    <h3>Subject Distribution</h3>
+                    <canvas id="subjectChart"></canvas>
+                </div>
+
+                <div class="chart-card">
+                    <h3>Study Progress</h3>
+                    <canvas id="progressChart"></canvas>
+                </div>
+
+            </section>
+
+            <!-- TIMER -->
+            <section class="section" id="timer">
+
+                <div class="timer-card">
+
+                    <h2>Pomodoro Timer</h2>
+
+                    <div class="timer-display" id="timerDisplay">
+                        25:00
+                    </div>
+
+                    <div class="timer-buttons">
+                        <button id="startTimer">Start</button>
+                        <button id="pauseTimer">Pause</button>
+                        <button id="resetTimer">Reset</button>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- MOCK TESTS -->
+            <section class="section" id="mocks">
+
+                <h2>Mock Test Tracker</h2>
+
+                <div class="mock-form">
+
+                    <input
+                        type="text"
+                        id="mockName"
+                        placeholder="Mock Name"
+                    >
+
+                    <input
+                        type="number"
+                        id="mockScore"
+                        placeholder="Score"
+                    >
+
+                    <button id="addMockBtn">
+                        Add Mock
+                    </button>
+
+                </div>
+
+                <div class="table-wrapper">
+
+                    <table>
+
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Mock</th>
+                                <th>Score</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="mockTableBody">
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+            <!-- GOALS -->
+            <section class="section" id="goals">
+
+                <h2>Year Goal</h2>
+
+                <div class="goal-box">
+
+                    <input
+                        type="number"
+                        id="goalInput"
+                        placeholder="Target Study Hours"
+                    >
+
+                    <button id="saveGoalBtn">
+                        Save Goal
+                    </button>
+
+                    <div class="goal-progress">
+
+                        <div class="progress-bar">
+                            <div
+                                class="progress-fill"
+                                id="goalFill">
+                            </div>
+                        </div>
+
+                        <p id="goalText">
+                            Goal Progress
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- RECENT ACTIVITY -->
+            <section class="section">
+
+                <h2>Recent Activity</h2>
+
+                <div id="activityList" class="activity-list">
+                </div>
+
+            </section>
+
+            <!-- BACKUP -->
+            <section class="section" id="backup">
+
+                <h2>Backup Data</h2>
+
+                <div class="backup-buttons">
+
+                    <button id="exportBtn">
+                        Export JSON
+                    </button>
+
+                    <input
+                        type="file"
+                        id="importFile"
+                        hidden
+                    >
+
+                    <button id="importBtn">
+                        Import JSON
+                    </button>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
